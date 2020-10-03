@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::post('get-letter',['as'=>'get-letter','uses'=>'App\Http\Controllers\NokiaController@getLetter']);
