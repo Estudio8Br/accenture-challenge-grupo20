@@ -220,9 +220,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
         let word = document.getElementById('word');
        
-        axios.post('https://backendgrupo20.herokuapp.com/get-letter').then( data => {
-            console.log(data)
-            word.value = word.value + data;
+        axios.post('https://backendgrupo20.herokuapp.com/get-letter').then( res => {
+            word.value = word.value + res.data;
         })
         
 

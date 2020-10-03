@@ -60,6 +60,6 @@ class NokiaController extends Controller
             return '';
         }
 
-        return $letter;
+        return response()->json($letter);
     }
 }
