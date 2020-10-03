@@ -233,7 +233,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
         //     }
         // );
         
-        axios.post("{{ route('get-letter') }}").then( data => {
+        axios.post('https://backendgrupo20.herokuapp.com/get-letter').then( data => {
             word.value = word.value + data;
         })
         
