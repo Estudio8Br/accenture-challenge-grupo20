@@ -5,12 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Accenture Challenge - Grupo 20</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ asset('assets/css/teclado.css') }}">
+<style>
+    .dnone{display:none!important}.keyboard .container{display:table;margin:auto;padding:0 5px}@media (max-width:900px){.keyboard .container{background:#fff;z-index:-1}}.keyboard .container .row{width:100%;display:flex;justify-content:space-between;margin-bottom:15px;margin-right:0!important;margin-left:0!important}.keyboard .container .row .col-sm-2{cursor:pointer;position:relative;display:inline-block;width:60px;margin-left:12px;margin-right:12px;border-radius:30px;overflow:hidden;padding:1.5px}.keyboard .container .row .col-sm-2::after,.keyboard .container .row .col-sm-2::before{content:'';position:absolute;top:0;left:0;height:100%;width:100%;transition:all .25s ease;border-radius:30px}.keyboard .container .row .col-sm-2:hover::before{box-shadow:inset 0 0 0 1px #2d2c3e}.keyboard .container .row .col-sm-2 .numero{font-weight:600;font-size:16px}.keyboard .container .row .col-sm-2 .letras{font-size:10px;display:flex;bottom:5px;position:absolute;left:9px;width:23px}.keyboard .container .row .col-sm-2 .number{cursor:pointer}
+</style>
 <body>
 <div class="container">
     <div class="col-3 m-auto">
@@ -141,8 +144,10 @@
 
 
 {{-- <script src="{{ asset('assets/js/index.js') }}"></script> --}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
 <script>
-window.addEventListener("load", function(event) {
+window.addEventListener("DOMContentLoaded", function(event) {
          
     const button = document.getElementById('enter')
     const buttons = document.querySelectorAll('.number')
@@ -151,23 +156,19 @@ window.addEventListener("load", function(event) {
 
     button.addEventListener('click', function(event){
         event.preventDefault()
-        let numbers = document.getElementById('number');
+        let numbers = document.getElementById('numbers');
+       
 
         let word = document.getElementById('word');
        
-        $.post(
-            '{{ route('get-letter') }}',
-            //'https://backendgrupo20.herokuapp.com/get-letter',
-            {
-                _token: '{{ csrf_token() }}',
-                letter: numbers
-            },
-            function(data) {
-                console.log(data)
-                word.value = word.value + data;
-            }
-        );
-        
+        axios.post('https://backendgrupo20.herokuapp.com/get-letter', {
+            letter : numbers.value
+        }).then( res => {
+            word.value = word.value + res.data;
+        })
+
+
+        numbers.value = ''
 
         //numbers.value = ''
         count = 0
@@ -188,14 +189,12 @@ window.addEventListener("load", function(event) {
                     actualLetter == value
                 }
                 if(value == actualLetter || actualLetter == ''){
-                    //console.log(actualLetter)
                     numbers.value = numbers.value + value
-                    actualLetter == value
+                    actualLetter = value
                     count++
                 }
             }
         })
-        
     }
 });
 </script>
