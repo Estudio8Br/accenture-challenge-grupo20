@@ -11,74 +11,36 @@ class NokiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLetter()
+    public function getLetter(Request $req)
     {
-        return "Aqui retorno a letra";
-    }
+        $request = $req->letter;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        // ABC DEF GHI JKL MNO PQRS TUV WXYZ *
+        // 222 333 444 555 666 7777 888 9999 +
+        
+        $words = [
+          '2' => 'ABC',
+          '3' => 'DEF',
+          '4' => 'GHI',
+          '5' => 'JKL',
+          '6' => 'MNO',
+          '7' => 'PQRS',
+          '8' => 'TUV',
+          '9' => 'WXYZ',
+        ];
+      
+        // Tamanho da string da requisição
+        $length = strlen($request);
+      
+        // Pega o número da requisição 
+        $request_word = substr($request, 0, 1);
+      
+        // Retorna as telas correspondentes do número
+        $letters = $words[$request_word];
+      
+        // Retorno da letra
+        $letter = substr($letters, $length-1, 1);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $letter;
     }
 }
