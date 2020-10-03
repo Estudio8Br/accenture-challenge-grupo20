@@ -216,7 +216,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
     button.addEventListener('click', function(event){
         event.preventDefault()
-        let numbers = document.getElementById('number');
+        let numbers = document.getElementById('numbers');
         console.log(numbers)
         console.log(numbers.text)
 
