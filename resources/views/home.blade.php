@@ -221,17 +221,17 @@ window.addEventListener("DOMContentLoaded", function(event) {
         let word = document.getElementById('word');
        
         
-        $.post (
-            '{{ route('get-letter') }}',
-            {
-                _token: '{{ csrf_token() }}',
-                letter: numbers
-            },
-            function(data) {
-                console.log(data)
-                word.value = word.value + data;
-            }
-        );
+        // $.post (
+        //     '{{ route('get-letter') }}',
+        //     {
+        //         _token: '{{ csrf_token() }}',
+        //         letter: numbers
+        //     },
+        //     function(data) {
+        //         console.log(data)
+        //         word.value = word.value + data;
+        //     }
+        // );
         
         axios.post("{{ route('get-letter') }}").then( data => {
             word.value = word.value + data;
