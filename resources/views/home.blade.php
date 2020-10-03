@@ -226,6 +226,9 @@ window.addEventListener("DOMContentLoaded", function(event) {
         }).then( res => {
             word.value = word.value + res.data;
         })
+
+
+        numbers.value = ''
         
 
         //numbers.value = ''
