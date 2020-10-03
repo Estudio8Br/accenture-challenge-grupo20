@@ -14,9 +14,7 @@
           .dnone {
     display: none !important;
 }
-.keyboard {
-    width: 300px;
-}
+
 .keyboard .container {
     display: table;
     padding-bottom: 5vh;
