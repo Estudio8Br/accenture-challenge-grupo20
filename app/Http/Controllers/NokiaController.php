@@ -13,7 +13,10 @@ class NokiaController extends Controller
      */
     public function getLetter(Request $req)
     {
+        
         $request = $req->letter;
+
+        
 
         // ABC DEF GHI JKL MNO PQRS TUV WXYZ *
         // 222 333 444 555 666 7777 888 9999 +
@@ -27,6 +30,7 @@ class NokiaController extends Controller
           '7' => 'PQRS',
           '8' => 'TUV',
           '9' => 'WXYZ',
+          '0' => ' '
         ];
       
         // Tamanho da string da requisição

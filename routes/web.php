@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('get-letter',['as'=>'home','uses'=>'App\Http\Controllers\NokiaController@getLetter']);
+Route::post('get-letter',['as'=>'get-letter','uses'=>'App\Http\Controllers\NokiaController@getLetter']);
