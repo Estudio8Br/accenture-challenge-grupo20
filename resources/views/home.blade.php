@@ -217,30 +217,18 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
         let word = document.getElementById('word');
        
-
-
-        fetch('{{ route('get-letter') }}', {
-            method: 'POST',
-            mode: 'cors', // pode ser cors ou basic(default)
-            redirect: 'follow',
-            body: {
-                letters: word
+        
+        $.post(
+            '{{ route('get-letter') }}',
+            {
+                _token: '{{ csrf_token() }}',
+                letter: numbers
+            },
+            function(data) {
+                console.log(data)
+                word.value = word.value + data;
             }
-            headers: new Headers({
-                'Content-Type': 'text/plain'
-            })
-            }).then(function(response) {
-        // tratar a response
-        });
-        // $.post(
-        //     {
-        //         _token: '{{ csrf_token() }}',
-        //     },
-        //     function(data) {
-        //         console.log(data)
-        //         word.value = word.value + data;
-        //     }
-        // );
+        );
         
 
         //numbers.value = ''
